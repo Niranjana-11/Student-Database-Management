@@ -273,22 +273,24 @@
   }
 
   async function ask() {
-    const question = $("question").value.trim();
-    if (!question) return;
-    const box = $("answer");
-    box.style.display = "block";
-    box.textContent = "🤔 Thinking...";
-    try {
-      const data = await request("/ai/query-student", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question }),
-      });
-      box.textContent = data.answer;
-    } catch (e) {
-      box.textContent = "Could not get an answer: " + e.message + ". Is Ollama running?";
-    }
+  const question = $("question").value.trim();
+  if (!question) return;
+  const box = $("answer");
+  box.style.display = "block";
+  box.textContent = "🤔 Thinking...";
+  try {
+    const data = await request("/ai/query-student", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+    box.textContent = data.answer;
+  } catch (e) {
+    box.textContent =
+      "Could not get an answer: " + e.message.replace(/\.$/, "") +
+      ". The AI assistant needs Ollama (local) or an API key (online).";
   }
+}
 
   $("save-btn").onclick = save;
   $("cancel-btn").onclick = resetForm;
