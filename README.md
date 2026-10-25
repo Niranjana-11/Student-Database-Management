@@ -2,6 +2,10 @@
 
 A full-stack student record manager built with **FastAPI**, **SQLAlchemy** and **SQLite**, with a clean web interface and an optional AI assistant that answers questions about your student data using a local LLM (Ollama).
 
+🌐 **Live demo:** https://student-database-management-upsn.onrender.com
+
+> ⚠️ The demo runs on a free server, so it sleeps after 15 minutes without visits (the first load can take about a minute) and the data resets on restart. The AI assistant needs Ollama, so it works when you run the project locally and shows a message on the live demo.
+
 ## ✨ Features
 
 - ➕ Add, ✏️ edit, 🗑️ delete and 📋 list students
@@ -10,7 +14,7 @@ A full-stack student record manager built with **FastAPI**, **SQLAlchemy** and *
 - 🤖 Ask questions in plain English, answered by a local `llama3.2:3b` model
 - 📘 Interactive API docs at `/docs` (Swagger UI)
 - 🌗 Responsive interface with automatic light and dark mode
-- 🚀 Ready-to-use deployment files for systemd and nginx
+- ☁️ Deployed on Render, with ready-to-use systemd and nginx files for a Linux server
 
 ## 🧰 Tech Stack
 
@@ -20,12 +24,12 @@ A full-stack student record manager built with **FastAPI**, **SQLAlchemy** and *
 | Database | SQLite via SQLAlchemy ORM |
 | AI | LangChain + Ollama (`llama3.2:3b`) |
 | Frontend | HTML, CSS and vanilla JavaScript |
-| Deployment | systemd service + nginx reverse proxy |
+| Deployment | Render (live demo), systemd + nginx (Linux server) |
 
 ## 📁 Project Structure
 
 ```
-Student_Database_Management/
+Student-Database-Management/
 ├── app/
 │   ├── routes/
 │   │   ├── ai_query.py
@@ -54,8 +58,8 @@ Student_Database_Management/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Niranjana-11/student-management-system.git
-cd student-management-system
+git clone https://github.com/Niranjana-11/Student-Database-Management.git
+cd Student-Database-Management
 ```
 
 ### 2. Create and activate a virtual environment
@@ -97,6 +101,8 @@ uvicorn main:app --reload
 | Web interface | http://127.0.0.1:8000/ui/ |
 | API docs | http://127.0.0.1:8000/docs |
 
+On first start, three sample students are added automatically when the database is empty.
+
 ## 🤖 AI Assistant (optional)
 
 The "Ask about your students" box uses a local model, so no API key is needed.
@@ -128,7 +134,19 @@ The "Ask about your students" box uses a local model, so no API key is needed.
 }
 ```
 
-## 🌐 Deployment (Linux)
+## ☁️ Deployment
+
+### Render (used for the live demo)
+
+| Setting | Value |
+|---|---|
+| Build command | `pip install -r requirements.txt` |
+| Start command | `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| Instance type | Free |
+
+Every push to `main` can redeploy the service. Free instances use temporary storage, so the SQLite data resets on restart.
+
+### Linux server (systemd + nginx)
 
 The `deploy/` folder contains two ready-made files:
 
@@ -152,10 +170,11 @@ Before using them, edit the user name and folder paths in `student-app.service` 
 ## 🛣️ Future Improvements
 
 - Authentication and user roles
+- Persistent database (PostgreSQL) for the hosted version
+- Hosted LLM option so the AI assistant also works online
 - Database migrations with Alembic
-- Pagination controls in the interface
 - Unit tests with pytest
 
 ## 👩‍💻 Author
 
-**Niranjana Rajesh** · [GitHub](https://github.com/Niranjana-11) · [LinkedIn](https://www.linkedin.com/in/-niranjana-rajesh/)
+**Niranjana** · [GitHub](https://github.com/Niranjana-11) · [LinkedIn](https://linkedin.com/in/niranjanarajesh)
