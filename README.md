@@ -158,4 +158,4 @@ Before using them, edit the user name and folder paths in `student-app.service` 
 
 ## 👩‍💻 Author
 
-**Niranjana** · [GitHub](https://github.com/Niranjana-11) · [LinkedIn](https://linkedin.com/in/niranjanarajesh)
+**Niranjana** · [GitHub](https://github.com/Niranjana-11) · [LinkedIn](https://www.linkedin.com/in/-niranjana-rajesh/)
